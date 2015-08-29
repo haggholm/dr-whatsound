@@ -1,0 +1,19 @@
+{
+  "name": "dr-whatsound",
+  "version": "1.0.0",
+  "description": "Dr. Whatsound",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/haggholm/dr-whatsound.git"
+  },
+  "author": "Petter Häggholm <petter@petterhaggholm.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haggholm/dr-whatsound/issues"
+  },
+  "homepage": "https://github.com/haggholm/dr-whatsound#readme"
+}

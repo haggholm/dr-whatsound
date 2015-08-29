@@ -1,0 +1,16 @@
+{
+  "preset": "node-style-guide",
+
+  "disallowMultipleVarDecl": null,
+  "requireCapitalizedComments": null,
+  "requireTrailingComma": null,
+
+  "jsDoc": {
+    "checkAnnotations": "jsdoc3",
+    "checkParamNames": true,
+    "checkRedundantParams": true,
+    "checkReturnTypes": true,
+    "checkRedundantReturns": true,
+    "checkTypes": "strictNativeCase"
+  }
+}
