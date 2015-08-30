@@ -60,15 +60,15 @@ var listDirs = async.memoize(_.partial(fs.readdir, WHATSOUND_PATH));
 var currentFiles
   , currentFile;
 
+function prep(str) {
+  return str
+    .trim()
+    .toLowerCase()
+    .replace(/[^A-Za-z0-9#♭]+/g, ' ');
+}
+
 function equivalent(actual, expected) {
   debug('{green:Compare {bold:%s} and {white:%s}}', expected, actual);
-
-  function prep(str) {
-    return str
-      .trim()
-      .toLowerCase()
-      .replace(/[^A-Za-z0-9#♭]+/g, ' ');
-  }
 
   actual = prep(actual);
   expected = prep(expected);
@@ -123,7 +123,7 @@ function showMenu() {
 
     dirs.sort();
 
-    console.log(tfunk('{white:Please select a collection}'));
+    console.log(tfunk('\n{white:Please select a collection}'));
 
     var i = 1;
     _.each(dirs, function(dir) {
@@ -165,6 +165,14 @@ function selectDir(dir) {
       console.log(tfunk('{red:Dr. Whatsound couldn’t find any files!'));
       process.exit(3);
     }
+
+    console.log(tfunk(util.format('\nDr. Whatsound will now test you on {bold:%s}…', dir)));
+    console.log('The possible answers are');
+    _.each(currentFiles, function(f) {
+      var ans = prep(path.basename(f, path.extname(f)));
+      ans = ans[0].toUpperCase() + ans.substr(1);
+      console.log('\t' + ans);
+    });
     nextGuess();
   });
 }
@@ -204,7 +212,7 @@ showMenu();
 cli.on('SIGINT', function() {
   switch (mode) {
     case 'guess':
-      DEBUG('{green:Back out of guess mode to menu mode}');
+      debug('{green:Back out of guess mode to menu mode}');
       mode = 'menu';
       showMenu();
       break;
@@ -230,9 +238,12 @@ function processGuess(guess) {
     tries = 0;
     console.log(tfunk(util.format('{green:%s/%s trials correct on the first try}', rightAtOnce, totalTrials)))
 
-  } else if (tries === 4) {
+  } else if (tries === 3) {
     console.log(tfunk('{red:✕}'));
-    console.log(tfunk('{yellow:The correct answer was {bold:%s}}', currentAnswer));
+    console.log(tfunk(util.format('{yellow:The correct answer was {bold:%s}}', currentAnswer)));
+    console.log('\nLet’s try another one…')
+    setImmediate(nextGuess);
+    tries = 0;
 
   } else {
     console.log(tfunk('{red:✕}'));
