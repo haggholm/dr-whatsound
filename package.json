@@ -1,7 +1,7 @@
 {
   "name": "dr-whatsound",
   "version": "1.0.0",
-  "description": "Dr. Whatsound",
+  "description": "Very simple ear trainer for user provided sound clips",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/haggholm/dr-whatsound/issues"
   },
-  "homepage": "https://github.com/haggholm/dr-whatsound#readme"
+  "homepage": "https://github.com/haggholm/dr-whatsound#readme",
+  "dependencies": {
+    "async": "^1.4.2",
+    "chalk": "^1.1.1",
+    "lodash": "^3.10.1",
+    "tfunk": "^3.0.1"
+  }
 }
